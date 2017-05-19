@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link type="text/css" href="./style.css" rel="stylesheet" media="all" />
+    <link type="text/css" href="./error.css" rel="stylesheet" media="all" />
+
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+     <div class="container">
+       <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+           <span class="sr-only">Toggle navigation</span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+         </button>
+         <a class="navbar-brand" href="/">Bowling Leisure Centre</a>
+       </div>
+       <div id="navbar" class="collapse navbar-collapse">
+         <ul class="nav navbar-nav">
+           <li class="active"><a href="/">Home</a></li>
+           <li><a href="/aboutUs">About</a></li>
+           <li><a href="/register">Register</a></li>
+
+           <?php
+           if (Acme\auth\LoggedIn::customer()) : ?>
+
+             <li><a href="/logout">Logout</a></li>
+
+           <?php else : ?>
+
+             <li><a href="/login">Login</a></li>
+
+             <?php endif; ?>
+         </ul>
+       </div><!--/.nav-collapse -->
+     </div>
+   </nav>
+
+
+  <div class="container">
+
+    <div class="row">
+      <br><br>
+    </div>
+
+
+      <div class="row">
+          <div class="col-md-2">
+
+          </div>
+
+          <div class="col-md-8">
+
+            <div class="alert" role="alert">
+
+            <h1>Register</h1>
+
+
+            <?php
+            if (isset($_SESSION['emal'])){
+              ?>
+
+                <ul>
+              <li><?php echo $_SESSION['emal']; ?> </li>
+            </ul>
+              <?php
+              unset($_SESSION['emal']); /* unset removes the error upon reload */
+            }
+              ?>
+
+              <?php
+              if (isset($_SESSION['invalidEmail'])){
+                ?>
+
+                  <ul>
+                <li><?php echo $_SESSION['invalidEmail']; ?> </li>
+              </ul>
+                <?php
+                unset($_SESSION['invalidEmail']); /* unset removes the error upon reload */
+              }
+                ?>
+
+              <?php
+            if (isset($_SESSION['msg'])){
+              ?>
+                <ul>
+              <li> <?php echo $_SESSION['msg']; ?> </li>
+            </ul>
+              <?php
+              unset($_SESSION['msg']); /* unset removes the error upon reload */
+            }
+            ?>
+
+            <?php
+            if (isset($_SESSION['pass'])){
+              ?>
+                <ul>
+            <li> <?php echo $_SESSION['pass']; ?> </li>
+          </ul>
+              <?php
+              unset($_SESSION['pass']); /* unset removes the error upon reload */
+            }
+            ?>
+
+            <?php
+            if (isset($_SESSION['email_error'])){
+              ?>
+                <ul>
+            <li> <?php echo $_SESSION['email_error']; ?> </li>
+          </ul>
+              <?php
+              unset($_SESSION['email_error']); /* unset removes the error upon reload */
+            }
+            ?>
+
+            <?php
+            if (isset($_SESSION['pass_length'])){
+              ?>
+                <ul>
+            <li><?php echo $_SESSION['pass_length']; ?> </li>
+          </ul>
+              <?php
+              unset($_SESSION['pass_length']); /* unset removes the error upon reload */
+            }
+            ?>
+            <?php
+            if (isset($_SESSION['f_name'])){
+              ?>
+                <ul>
+            <li><?php echo $_SESSION['f_name']; ?>  </li>
+          </ul>
+              <?php
+              unset($_SESSION['f_name']); /* unset removes the error upon reload */
+            }
+             ?>
+
+             <?php
+             if (isset($_SESSION['l_name'])){
+               ?>
+                 <ul>
+              <li><?php echo $_SESSION['l_name']; ?> </li>
+            </ul>
+              <?php
+               unset($_SESSION['l_name']); /* unset removes the error upon reload */
+             }
+              ?>
+              <?php
+              if (isset($_SESSION['email_add'])){
+                ?>
+                  <ul>
+               <li><?php echo $_SESSION['email_add']; ?> </li>
+             </ul>
+               <?php
+                unset($_SESSION['email_add']); /* unset removes the error upon reload */
+              }
+               ?>
+
+               <?php
+               if (isset($_SESSION['first_pass'])){
+                 ?>
+                   <ul>
+                <li><?php echo $_SESSION['first_pass']; ?> </li>
+              </ul>
+                <?php
+                 unset($_SESSION['first_pass']); /* unset removes the error upon reload */
+               }
+                ?>
+              </div>
+
+              <hr>
+
+
+            <form id="registerform" name="registerform" class="form-horizontal"
+            action="/register" method="post" novalidate>
+
+              <div class="form-group">
+
+                <label for="first_name" class="col-sm-2 control-label">First Name</label>
+
+                <div class="col-sm-10">
+                  <input type="text" class="form-control required" id="first_name"
+                  name="first_name" placeholder="Enter First Name">
+
+                </div>
+
+              </div>
+
+              <div class="form-group">
+
+                <label for="last_name" class="col-sm-2 control-label">Last Name</label>
+
+                <div class="col-sm-10">
+                  <input type="text" class="form-control required" id="last_name"
+                  name="last_name" placeholder="Enter Last Name">
+
+                </div>
+
+              </div>
+
+              <div class="form-group">
+
+              <label for="address" class="col-sm-2 control-label">Address</label>
+
+              <div class="col-sm-10">
+                <input type="address" class="form-control" id="address"
+                name="address" placeholder="Enter Address">
+              </div>
+
+            </div>
+
+            <div class="form-group">
+
+              <label for="city" class="col-sm-2 control-label">City</label>
+
+              <div class="col-sm-10">
+                <input type="city" class="form-control" id="city"
+                name="city" placeholder="Enter City">
+              </div>
+
+            </div>
+
+            <div class="form-group">
+
+              <label for="postcode" class="col-sm-2 control-label">Postcode</label>
+
+              <div class="col-sm-10">
+                <input type="postcode" class="form-control" id="postcode"
+                name="postcode" placeholder="Enter Postcode">
+              </div>
+
+            </div>
+
+            <div class="form-group">
+
+              <label for="county" class="col-sm-2 control-label">County</label>
+
+              <div class="col-sm-10">
+                <input type="county" class="form-control" id="county"
+                name="county" placeholder="Enter County">
+              </div>
+
+            </div>
+
+            <div class="form-group">
+
+              <label for="contact_no" class="col-sm-2 control-label">Contact No</label>
+
+              <div class="col-sm-10">
+                <input type="contact_no" class="form-control" id="contact_no"
+                name="contact_no" placeholder="Enter Contact Number">
+              </div>
+
+            </div>
+
+
+
+
+              <div class="form-group">
+
+                <label for="email" class="col-sm-2 control-label">Email</label>
+
+                <div class="col-sm-10">
+                  <input type="email" class="form-control required" id="email"
+                   name="email" placeholder="user@example.com">
+                </div>
+
+              </div>
+
+              <div class="form-group">
+
+                <label for="verify_email" class="col-sm-2 control-label">Verify Email</label>
+
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" id="verify_email"
+                  name="verify_email" placeholder="user@example.com">
+                </div>
+
+              </div>
+
+              <div class="form-group">
+
+                <label for="password" class="col-sm-2 control-label">Password</label>
+
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="password"
+                  name="password" placeholder="Password">
+                </div>
+
+              </div>
+
+              <div class="form-group">
+
+                <label for="verify_password" class="col-sm-2 control-label">Verify Password</label>
+
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="verify_password"
+                  name="verify_password" placeholder="Password">
+                </div>
+
+              </div>
+
+              <hr>
+
+              <div class="form-group">
+
+                <div class="col-sm-offset-2 col-sm-10">
+
+                  <button type="submit" class="btn btn-primary">Register</button>
+
+                </div>
+              </div>
+
+            </form>
+
+          </div>
+
+        </div>
+      </div>
+
+      <footer class="footer">
+      <div class="row footer-background">
+        <div class="col-md-3">
+          <div class="padding">
+
+            <h4>Contact Us</h4>
+            123 Main street.<br>
+            Leicester, Leicestershire,
+            LE3 2HD<br>
+            +44 (0116) 2458765
+          </div>
+
+        </div>
+        <div class="col-md-6">
+        </div>
+
+        <div class="col-md-3">
+          <img src="/assets/map-small.png" class="pull-right">
+        </div>
+
+      </div>
+
+    </footer>
+
+<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+<script   src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"   integrity="sha256-JklDYODbg0X+8sPiKkcFURb5z7RvlNMIaE3RA2z97vw="   crossorigin="anonymous"></script>
+<script   src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.1/jquery.validate.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>
+
+    $(document).ready(function(){
+
+  $("#registerform").validate({
+
+    rules: {
+        verify_username: {
+
+          required: true,
+          email: true,
+          equalTo: "#username"
+        },
+
+          password: {
+
+          required: true,
+          password: true,
+          equalTo: "#password"
+        }
+    }
+
+  });
+
+});
+
+
+</script>
+
+</body>
+
+</html>

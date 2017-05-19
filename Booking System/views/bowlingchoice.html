@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bowling Choices</title>
+
+
+    <link type="text/css" href="./style.css" rel="stylesheet" media="all" />
+    <link type="text/css" href="./error.css" rel="stylesheet" media="all" />
+    <link type="text/css" href="./font-awesome.min.css" rel="stylesheet" media="all" />
+
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="jquery-ui.css" rel="stylesheet">
+
+
+
+
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+     <div class="container">
+       <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+           <span class="sr-only">Toggle navigation</span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+         </button>
+         <a class="navbar-brand" href="/">Bowling Leisure Centre</a>
+       </div>
+       <div id="navbar" class="collapse navbar-collapse">
+         <ul class="nav navbar-nav">
+           <li class="active"><a href="/">Home</a></li>
+           <li><a href="/aboutUs">About</a></li>
+           <li><a href="/register">Register</a></li>
+
+           <?php
+           if (Acme\auth\LoggedIn::customer()) : ?>
+
+             <li><a href="/logout">Logout</a></li>
+
+           <?php else : ?>
+
+             <li><a href="/login">Login</a></li>
+
+             <?php endif; ?>
+         </ul>
+       </div><!--/.nav-collapse -->
+     </div>
+   </nav>
+
+
+  <div class="container">
+
+    <div class="row">
+      <br><br>
+    </div>
+
+
+      <div class="row">
+          <div class="col-md-2">
+
+          </div>
+
+          <div class="col-md-8">
+
+            <div class="alert" role="alert">
+
+            <h1>Bowling choices</h1>
+
+            <?php
+            if (isset($_SESSION['msg'])){
+              ?>
+
+                <ul>
+              <li><?php echo $_SESSION['msg']; ?> </li>
+            </ul>
+              <?php
+              unset($_SESSION['msg']); /* unset removes the error upon reload */
+            }
+              ?>
+
+
+              <hr>
+
+              <p style="text-align:center;"><strong> Choose below from one of the bowling choices, and any extra beverages you may like to purchase as part of the bowling session</strong></p>
+
+
+            <form id="bowlingchoice" name="bowlingchoice" class="form-horizontal"
+            action="/bowlingchoice" method="post" novalidate>
+
+
+            <div class="form-group">
+
+              <label for="standard" class="col-sm-2 control-label" >Standard Bowling</label>
+              <br>
+              <div class="col-sm-10">
+                <input name="value" type="radio" id="standard"
+                 value="7" required="true">
+
+              </div>
+
+            </div>
+
+            <div class="form-group">
+
+              <label for="special" class="col-sm-2 control-label">Special Bowling</label>
+              <br>
+              <div class="col-sm-10">
+                <input type="radio" name="value" id="special" value="10" required="true"> <span>£3 extra per person for a meal deal of a choice of burger, with chips and drink</span>
+
+          </div>
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="chicken_burger" class="col-sm-2 control-label">Chicken Burger</label>
+
+          <div class="col-sm-10">
+            <input type="text" id="chicken_brger" class="form-control" type="text" list="chicken_burger" autocomplete="off"
+            name="chicken_burger" placeholder="Click on arrow to choose amount"/>
+
+                  <datalist id="chicken_burger">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                  </datalist>
+
+        </div>
+      </div>
+
+        <div class="form-group">
+
+          <label for="cheese_burger" class="col-sm-2 control-label">Cheese Burger</label>
+
+        <div class="col-sm-10">
+          <input type="text" id="cheese_brger" class="form-control" type="text" list="cheese_burger" autocomplete="off"
+          name="cheese_burger" placeholder="Click on arrow to choose amount"/>
+
+                <datalist id="cheese_burger">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </datalist>
+
+      </div>
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="chips" class="col-sm-2 control-label">Chips</label>
+        <div class="col-sm-10">
+          <input type="text" id="fries" class="form-control" type="text" list="chips" autocomplete="off"
+          name="chips" placeholder="Click on arrow to choose amount"/>
+
+                <datalist id="chips">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </datalist>
+
+      </div>
+
+        </div>
+        <div class="form-group">
+
+          <label for="coke" class="col-sm-2 control-label">Coke</label>
+        <div class="col-sm-10">
+          <input type="text" id="cola" class="form-control" type="text" list="coke" autocomplete="off"
+          name="coke" placeholder="Click on arrow to choose amount"/>
+
+                <datalist id="coke">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </datalist>
+
+      </div>
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="pepsi" class="col-sm-2 control-label">Pepsi</label>
+        <div class="col-sm-10">
+          <input type="text" id="bepsi" class="form-control" type="text" list="pepsi" autocomplete="off"
+          name="pepsi" placeholder="Click on arrow to choose amount"/>
+
+                <datalist id="pepsi">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </datalist>
+
+      </div>
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="fanta" class="col-sm-2 control-label">Fanta</label>
+        <div class="col-sm-10">
+          <input type="text" id="fnta" class="form-control" type="text" list="fanta" autocomplete="off"
+          name="fanta" placeholder="Click on arrow to choose amount"/>
+
+                <datalist id="fanta">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </datalist>
+
+      </div>
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="seven_up" class="col-sm-2 control-label">7-up</label>
+        <div class="col-sm-10">
+          <input type="text" id="7up" class="form-control" type="text" list="seven-up" autocomplete="off"
+          name="seven_up" placeholder="Click on arrow to choose amount"/>
+
+                <datalist id="seven-up">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </datalist>
+
+      </div>
+
+        </div>
+
+
+              </div>
+
+
+              <hr>
+
+              <div class="form-group">
+
+                <div class="col-sm-offset-2 col-sm-10">
+
+                  <button type="submit" name="submit" value="submit 1" class="btn btn-primary">Next Process</button>
+
+                  <button type="submit" name="submit" value="submit 2" class="btn btn-primary">Cancel</button>
+                  <br><br><br><br><br><br>
+
+                </div>
+              </div>
+
+            </form>
+
+          </div>
+
+        </div>
+      </div>
+
+      <footer class="footer">
+  <div class="row footer-background">
+    <div class="col-md-3">
+      <div class="padding">
+
+        <h4>Contact Us</h4>
+        123 Main street.<br>
+        Leicester, Leicestershire,
+        LE3 2HD<br>
+        +44 (0116) 2458765
+      </div>
+
+    </div>
+    <div class="col-md-6">
+    </div>
+
+    <div class="col-md-3">
+      <img src="/assets/map-small.png" class="pull-right">
+    </div>
+
+  </div>
+
+</footer>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"> </script>
+
+  <script src="jquery-ui.js"> </script>
+
+
+
+  <script>
+
+
+        $("#date").datepicker({
+
+
+          dateFormat: "yy-mm-dd",
+          minDate: 0,
+          changeMonth: true,
+          changeYear: false
+
+          });
+
+
+  </script>
+
+  <script>
+
+                  (function ($) {
+                $('.spinner .btn:first-of-type').on('click', function() {
+                $('.spinner input').val( parseInt($('.spinner input').val(), 10) + 1);
+                });
+                $('.spinner .btn:last-of-type').on('click', function() {
+                $('.spinner input').val( parseInt($('.spinner input').val(), 10) - 1);
+                });
+                })(jQuery);
+
+  </script>
+
+<script>
+
+    $(document).ready(function(){
+
+  $("#bowlingchoice").validate({
+
+    rules: {
+        verify_username: {
+
+          required: true,
+          email: true,
+          equalTo: "#username"
+        },
+
+          password: {
+
+          required: true,
+          password: true,
+          equalTo: "#password"
+        }
+    }
+
+  });
+
+});
+
+
+</script>
+
+</body>
+
+</html>
